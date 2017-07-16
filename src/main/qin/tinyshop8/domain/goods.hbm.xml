@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false"
+                   auto-import="true" package="qin.tinyshop8.domain">
+
+    <!-- 商品实体类 -->
+    <class name="Goods" table="goods_">
+        <id name="id" column="goods_id" type="java.lang.Long">
+            <generator class="increment"/>
+        </id>
+
+        <!-- 商品名称 -->
+        <property name="goodsName" column="name" length="50"/>
+
+        <!-- 副标题 -->
+        <property name="goodsSubTitle" column="subtitle" length="300"/>
+
+        <!-- 关键词 -->
+        <property name="goodsKeyWords" column="keyword" length="300"/>
+
+        <!-- 编号 -->
+        <property name="goodsProNo" column="pro_no" length="20"/>
+
+        <!-- 商品类型 -->
+        <many-to-one name="goodsType" class="GoodsType"
+                     column="type_id" foreign-key="fk_goodsType" cascade="delete"/>
+
+        <!-- 相册 -->
+        <list name="goodsImgs" table="goods_images" cascade="delete">
+            <key column="key_img" foreign-key="fk_goodsImages"></key>
+            <list-index column="list_index_img"/>
+            <element column="element_img" type="java.lang.String"/>
+        </list>
+
+        <!-- 货号 -->
+        <property name="goodsNo" column="goods_no" length="20"/>
+
+        <!-- 库存 -->
+        <property name="goodsStoreNums" column="store_nums"/>
+
+        <!-- 重量 -->
+        <property name="goodsWeight" column="weight" length="11"/>
+
+        <!-- 零售价 -->
+        <property name="goodsSellPrice" column="sell_price"/>
+
+        <!-- 市场价 -->
+        <property name="goodsMarketPrice" column="market_price"/>
+
+        <!-- 成本价 -->
+        <property name="goodsCostPrice" column="cost_price"/>
+
+        <!-- 商品分类 -->
+        <many-to-one name="goodsCategory" class="GoodsCategory"
+                     column="category_id" foreign-key="fk_goodsCategory" cascade="delete"/>
+
+        <!-- 商品品牌 -->
+        <many-to-one name="goodsSpec" class="GoodsSpec"
+                     column="spec_id" foreign-key="fk_goodsSpec" cascade="delete"/>
+
+    </class>
+
+    <!-- 商品实体类 -->
+
+    <!-- 商品品牌实体类 -->
+    <class name="GoodsBrand" table="goods_brand">
+        <id name="id" column="brand_id">
+            <generator class="increment"/>
+        </id>
+
+        <!-- 品牌名称 -->
+        <property name="brandName" column="name" length="10"/>
+
+        <!-- 品牌网址 -->
+        <property name="brandURL" column="url" length="100"/>
+
+        <!-- 品牌排序 -->
+        <property name="brandSort" column="sort"/>
+
+        <!-- 一个品牌对应一个类型 -->
+        <one-to-one name="goodsType" class="GoodsType"
+                    cascade="delete" foreign-key="fk_goodsType"/>
+
+    </class>
+    <!-- 商品品牌实体类 -->
+
+    <!-- 商品分类实体类 -->
+    <class name="GoodsCategory" table="goods_category">
+        <id name="id" column="category_id">
+            <generator class="increment"/>
+        </id>
+
+        <!-- 名称 -->
+        <property name="categoryName" column="name" length="200"/>
+
+        <!-- 别名 -->
+        <property name="categoryAlias" column="alias" length="200"/>
+
+        <!-- 上级 -->
+        <many-to-one name="categoryParent" cascade="delete"
+                     column="category_parent_id" class="GoodsCategory"
+                     foreign-key="fk_parent"/>
+
+        <!-- 类型 -->
+        <one-to-one name="categoryType" class="GoodsType"
+                    cascade="delete" foreign-key="fk_categoryType"/>
+
+        <!-- 排序 -->
+        <property name="categorySort" column="sort"/>
+
+        <!-- 与商品多对一 -->
+        <set name="categorySet" cascade="delete">
+            <key column="categorySet_id" foreign-key="fk_categorySet"></key>
+            <one-to-many class="GoodsCategory"/>
+        </set>
+
+        <!-- 下级 -->
+        <set name="childrenSet" table="categoryChildren">
+            <key column="category_children_id" foreign-key="fk_category_set"></key>
+            <one-to-many class="GoodsCategory"/>
+        </set>
+
+    </class>
+
+    <!-- 商品分类实体类 -->
+
+    <!-- 商品规格实体类 -->
+    <class name="GoodsSpec" table="goods_spec">
+        <id name="id" column="spec_id">
+            <generator class="increment"/>
+        </id>
+
+        <!-- 名称 -->
+        <property name="specName" column="name"/>
+
+        <!-- 类型 -->
+        <property name="specType" column="type"/>
+
+        <!-- 备注 -->
+        <property name="specNote" column="note"/>
+
+        <!-- 与商品多对一 -->
+        <set name="specSet" cascade="delete">
+            <key column="specSet_id" foreign-key="fk_specSet"></key>
+            <one-to-many class="GoodsSpec"/>
+        </set>
+
+    </class>
+    <!-- 商品规格实体类 -->
+
+    <!-- 商品类型实体类 -->
+    <class name="GoodsType" table="goods_type">
+        <id name="id" column="type_id">
+            <generator class="increment"/>
+        </id>
+
+        <!-- 商品分类 -->
+        <one-to-one name="goodsCategory" class="GoodsCategory"
+                    cascade="delete" foreign-key="fk_goodsCategory"/>
+
+        <!-- 类型名称 -->
+        <property name="typeName" column="name"/>
+
+        <!-- 类型规格 -->
+        <one-to-one name="typeSpec" class="GoodsType"
+                    cascade="delete" foreign-key="fk_typeSpec"/>
+
+        <!-- 品牌 -->
+        <one-to-one name="typeBrand" class="GoodsBrand"
+                    cascade="delete" foreign-key="fk_typeBrand"/>
+
+        <!-- 规格 -->
+        <property name="typeAttr" column="attr"/>
+
+        <!-- 与商品多对一 -->
+        <set name="typeSet" cascade="delete">
+            <key column="typeSet_id" foreign-key="fk_typeSet"></key>
+            <one-to-many class="GoodsType"/>
+        </set>
+
+    </class>
+    <!-- 商品类型实体类 -->
+
+</hibernate-mapping>

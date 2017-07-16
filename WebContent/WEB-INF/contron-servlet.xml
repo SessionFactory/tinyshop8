@@ -16,7 +16,7 @@
     <mvc:annotation-driven></mvc:annotation-driven>
 
     <!-- scan package -->
-    <context:component-scan base-package="qin.javaee8"/>
+    <context:component-scan base-package="qin.tinyshop8"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>

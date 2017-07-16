@@ -15,7 +15,7 @@
 
     <!-- scan package -->
     <!-- base, dao, service -->
-    <context:component-scan base-package="qin.javaee8"/>
+    <context:component-scan base-package="qin.tinyshop8"/>
 
     <!-- Configurer that replaces ${...} placeholders with values from a properties file -->
     <!-- (in this case, JDBC-related settings for the dataSource definition below) -->
