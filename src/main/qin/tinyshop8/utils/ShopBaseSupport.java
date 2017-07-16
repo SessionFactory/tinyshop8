@@ -29,4 +29,8 @@ public interface ShopBaseSupport extends JavaEE8BaseSupport
         return Logger.getLogger(ShopBaseSupport.class);
     }
 
+    /**
+     * 图片基本路径
+     */
+    String basePath = "http://localhost/tinyshopV3.0_data/";
 }

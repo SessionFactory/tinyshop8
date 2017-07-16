@@ -173,7 +173,7 @@
                     cascade="delete" foreign-key="fk_typeBrand"/>
 
         <!-- 规格 -->
-        <property name="typeAttr" column="attr"/>
+        <property name="typeAttr" column="attr" length="8000"/>
 
         <!-- 与商品多对一 -->
         <set name="typeSet" cascade="delete">
