@@ -8,5 +8,11 @@
 </head>
 <body>
 
+<%
+    int i = 9;
+%>
+
+<input type="text" value="<%=i%>">
+
 </body>
 </html>
