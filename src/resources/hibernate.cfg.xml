@@ -7,7 +7,7 @@
 
     <session-factory>
 
-        <mapping resource="qin/tinyshop8/domain/goods.hbm.xml"/>
+        <!--<mapping resource="qin/tinyshop8/domain/goods.hbm.xml"/>-->
 
     </session-factory>
 
