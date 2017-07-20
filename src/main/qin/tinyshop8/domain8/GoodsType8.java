@@ -26,15 +26,15 @@ public class GoodsType8
     //region 构造函数和toString()
 
     /**
-     * @param categoryName  名称
-     * @param categoryAlias 别名
-     * @param categorySort  排序
+     * @param typeName  名称
+     * @param typeAlias 别名
+     * @param typeSort  排序
      */
-    public GoodsType8(String categoryName, String categoryAlias, Integer categorySort)
+    public GoodsType8(String typeName, String typeAlias, Integer typeSort)
     {
-        this.categoryName = categoryName;
-        this.categoryAlias = categoryAlias;
-        this.categorySort = categorySort;
+        this.typeName = typeName;
+        this.typeAlias = typeAlias;
+        this.typeSort = typeSort;
     }
 
     @Override
@@ -42,9 +42,9 @@ public class GoodsType8
     {
         final StringBuilder sb = new StringBuilder("GoodsType8{");
         sb.append("classAnnotation='").append(classAnnotation).append('\'');
-        sb.append(", categoryName='").append(categoryName).append('\'');
-        sb.append(", categoryAlias='").append(categoryAlias).append('\'');
-        sb.append(", categorySort=").append(categorySort);
+        sb.append(", typeName='").append(typeName).append('\'');
+        sb.append(", typeAlias='").append(typeAlias).append('\'');
+        sb.append(", typeSort=").append(typeSort);
         sb.append('}');
         return sb.toString();
     }
@@ -136,16 +136,16 @@ public class GoodsType8
     /**
      * 名称
      */
-    private String categoryName;
+    private String typeName;
 
-    public String getCategoryName()
+    public String getTypeName()
     {
-        return categoryName;
+        return typeName;
     }
 
-    public void setCategoryName(String categoryName)
+    public void setTypeName(String typeName)
     {
-        this.categoryName = categoryName;
+        this.typeName = typeName;
     }
     //endregion
 
@@ -153,16 +153,16 @@ public class GoodsType8
     /**
      * 别名
      */
-    private String categoryAlias;
+    private String typeAlias;
 
-    public String getCategoryAlias()
+    public String getTypeAlias()
     {
-        return categoryAlias;
+        return typeAlias;
     }
 
-    public void setCategoryAlias(String categoryAlias)
+    public void setTypeAlias(String typeAlias)
     {
-        this.categoryAlias = categoryAlias;
+        this.typeAlias = typeAlias;
     }
     //endregion
 
@@ -170,16 +170,16 @@ public class GoodsType8
     /**
      * 排序
      */
-    private Integer categorySort;
+    private Integer typeSort;
 
-    public Integer getCategorySort()
+    public Integer getTypeSort()
     {
-        return categorySort;
+        return typeSort;
     }
 
-    public void setCategorySort(Integer categorySort)
+    public void setTypeSort(Integer typeSort)
     {
-        this.categorySort = categorySort;
+        this.typeSort = typeSort;
     }
     //endregion
 }

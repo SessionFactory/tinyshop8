@@ -15,6 +15,7 @@ import java.util.List;
  * @author qinzhengying
  * @since 1.8 2017/7/19
  */
+@SuppressWarnings("all")
 public class Goods8
           extends SuperLongEntity
           implements ShopBaseSupport
@@ -124,16 +125,16 @@ public class Goods8
     /**
      * 商品分类
      */
-    private GoodsType8 goodsCategory;
+    private GoodsType8 goodsType;
 
-    public GoodsType8 getGoodsCategory()
+    public GoodsType8 getGoodsType()
     {
-        return goodsCategory;
+        return goodsType;
     }
 
-    public void setGoodsCategory(GoodsType8 goodsCategory)
+    public void setGoodsType(GoodsType8 goodsType)
     {
-        this.goodsCategory = goodsCategory;
+        this.goodsType = goodsType;
     }
     //endregion
 
@@ -141,16 +142,16 @@ public class Goods8
     /**
      * 商品品牌
      */
-    private GoodsBrand8 goodsSpec;
+    private GoodsBrand8 goodsBrand;
 
-    public GoodsBrand8 getGoodsSpec()
+    public GoodsBrand8 getGoodsBrand()
     {
-        return goodsSpec;
+        return goodsBrand;
     }
 
-    public void setGoodsSpec(GoodsBrand8 goodsSpec)
+    public void setGoodsBrand(GoodsBrand8 goodsBrand)
     {
-        this.goodsSpec = goodsSpec;
+        this.goodsBrand = goodsBrand;
     }
     //endregion
 

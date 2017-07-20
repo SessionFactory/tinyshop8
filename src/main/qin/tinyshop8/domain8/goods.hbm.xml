@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false"
+                   auto-import="true" package="qin.tinyshop8.domain8">
+
+    <!-- 商品实体类 -->
+    <class name="Goods8">
+        <id name="id" column="goods_id">
+            <generator class="increment"/>
+        </id>
+
+        <!-- 商品名称 -->
+        <property name="goodsName" column="name" length="50"/>
+
+        <!-- 副标题 -->
+        <property name="goodsSubTitle" column="subtitle" length="300"/>
+
+        <!-- 关键词 -->
+        <property name="goodsKeyWords" column="keyword" length="300"/>
+
+        <!-- 编号 -->
+        <property name="goodsProNo" column="pro_no" length="20"/>
+
+        <!-- 相册 -->
+        <list name="goodsImgs" table="goods_images8" cascade="delete">
+            <key column="key_img" foreign-key="fk_goodsImages"></key>
+            <list-index column="list_index_img"/>
+            <element column="element_img" type="java.lang.String"/>
+        </list>
+
+        <!-- 货号 -->
+        <property name="goodsNo" column="goods_no" length="20"/>
+
+        <!-- 库存 -->
+        <property name="goodsStoreNums" column="store_nums"/>
+
+        <!-- 重量 -->
+        <property name="goodsWeight" column="weight" length="11"/>
+
+        <!-- 零售价 -->
+        <property name="goodsSellPrice" column="sell_price"/>
+
+        <!-- 市场价 -->
+        <property name="goodsMarketPrice" column="market_price"/>
+
+        <!-- 成本价 -->
+        <property name="goodsCostPrice" column="cost_price"/>
+
+        <!-- 添加时间 -->
+        <property name="goodsAddDate" type="java.lang.String"/>
+
+        <!-- 与品牌一对多 -->
+        <many-to-one name="goodsBrand" class="GoodsBrand8"
+                     foreign-key="fk_goodsBrand_m2o" cascade="delete"/>
+
+        <!-- 与类型一对多 -->
+        <many-to-one name="goodsType" class="GoodsType8"
+                     foreign-key="fk_goodsType_m2o" cascade="delete"/>
+
+    </class>
+    <!-- 商品实体类 -->
+
+    <!-- 商品品牌实体类 -->
+
+    <class name="GoodsBrand8">
+        <id name="id" column="goodsBrand_id">
+            <generator class="increment"/>
+        </id>
+
+        <!-- 品牌名称 -->
+        <property name="brandName" column="name" length="10"/>
+
+        <!-- 品牌网址 -->
+        <property name="brandURL" column="url" length="100"/>
+
+        <!-- 品牌排序 -->
+        <property name="brandSort" column="sort"/>
+
+        <!-- 与商品多对一 -->
+        <set name="goods8Set" cascade="delete">
+            <key column="key_goodsBrand8Set" foreign-key="fk_goodsBrand8Set"></key>
+            <one-to-many class="Goods8"/>
+        </set>
+
+    </class>
+
+    <!-- 商品品牌实体类 -->
+
+    <!-- 商品类型实体类 -->
+
+    <class name="GoodsType8">
+        <id name="id" column="goodsType_id">
+            <generator class="increment"/>
+        </id>
+
+        <!-- 类型名称 -->
+        <property name="typeName" column="name"/>
+
+        <!-- 规格 -->
+        <property name="typeAlias" column="attr" length="8000"/>
+
+        <!-- 与商品多对一 -->
+        <set name="goods8Set" cascade="delete">
+            <key column="col_goods8TypeSet" foreign-key="fk_goods8TypeSet"></key>
+            <one-to-many class="Goods8"/>
+        </set>
+
+        <!-- 上级分类 -->
+        <many-to-one name="parentType" column="goods_type8_parent"
+                     cascade="delete"/>
+
+        <!-- 下级分类 -->
+        <set name="childrenSet" cascade="delete">
+            <key column="key_goodsType8_children"
+                 foreign-key="fk_goodsType8_children"></key>
+            <one-to-many class="GoodsType8"/>
+        </set>
+
+    </class>
+
+    <!-- 商品类型实体类 -->
+
+</hibernate-mapping>

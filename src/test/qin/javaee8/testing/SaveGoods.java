@@ -50,9 +50,9 @@ public class SaveGoods implements ShopBaseSupport,
             Object[] objects = list.get(i);
 
             sb.append("        GoodsCategory goodsCategory" + i + " = new GoodsCategory();\n" +
-                                "        goodsCategory" + i + ".setCategoryAlias(\"" + objects[2] + "\");\n" +
-                                "        goodsCategory" + i + ".setCategoryName(\"" + objects[1] + "\");\n" +
-                                "        goodsCategory" + i + ".setCategorySort(" + objects[9] + ");\n");
+                                "        goodsCategory" + i + ".setTypeAlias(\"" + objects[2] + "\");\n" +
+                                "        goodsCategory" + i + ".setTypeName(\"" + objects[1] + "\");\n" +
+                                "        goodsCategory" + i + ".setTypeSort(" + objects[9] + ");\n");
         }
 
         for (int i = 0; i < list.size(); i++)
