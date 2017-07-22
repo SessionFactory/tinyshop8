@@ -1,5 +1,7 @@
 package qin.tinyshop8.utils;
 
+import qin.javaee8.core.support.SuperEntity8;
+
 import java.io.Serializable;
 
 /**
@@ -14,18 +16,6 @@ import java.io.Serializable;
  * @since 1.8 2017/7/15
  */
 public interface SuperEntity<T extends Serializable>
+          extends SuperEntity8<T>
 {
-    /**
-     * 获取我的主键
-     *
-     * @return 返回获取到的主键
-     */
-    T getId();
-
-    /**
-     * 设置主键
-     *
-     * @param id
-     */
-    void setId(T id);
 }

@@ -33,4 +33,18 @@ public interface ShopBaseSupport extends JavaEE8BaseSupport
      * 图片基本路径
      */
     String basePath = "http://localhost/tinyshopV3.0_data/";
+
+    //region 2017/7/22
+
+    /**
+     * 定义数据访问层提示开始字符串
+     */
+    String daoStart = "<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+
+    /**
+     * 定义数据访问层提示结束字符串
+     */
+    String daoEnd = ">>>>>>>>>>>>>>>>>>>>>>>>>>>";
+
+    //endregion
 }
