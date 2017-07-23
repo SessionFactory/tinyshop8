@@ -46,7 +46,34 @@ public class GoodsTypeDAOImpl
 
     //region 一期功能 7-22
 
-    //region 以html字符串形式将所有的商品类型数据返回
+    //region 重写findAll方法
+
+    /**
+     * 查询表中全部记录
+     *
+     * @return 返回所有的查询结果
+     * @author qinzhengying
+     * @since 1.8 2017/7/23
+     */
+    @Override
+    public FrameWorkDSCResult findAll()
+    {
+        FrameWorkDSCResult result = new FrameWorkDSCResult();
+
+        //根据表中的排序字段进行排序
+        List<GoodsType8JPA> goodsType8JPAList = getSession()
+                  .createQuery("from GoodsType8JPA order by typeSort asc ")
+                  .list();
+
+        //设置查询结果集合
+        result.setSearchList(goodsType8JPAList);
+
+        return result;
+    }
+
+    //endregion
+
+    //region 以html字符串形式将所有的商品类型数据返回(finished)
 
     /**
      * 以html字符串形式将所有的商品类型数据返回
@@ -58,6 +85,75 @@ public class GoodsTypeDAOImpl
     public String showAllType() throws DataAccessException
     {
         StringBuilder sb = new StringBuilder();
+
+        //头字符串
+        sb
+                  .append("            <table class=\"table table-striped\">\n")
+                  .append("                <thead>\n")
+                  .append("                <tr>\n")
+                  .append("                    <th>选择</th>\n")
+                  .append("                    <th>操作</th>\n")
+                  .append("                    <th>分类名称</th>\n")
+                  .append("                    <th>上级分类</th>\n")
+                  .append("                    <th>别名</th>\n")
+                  .append("                    <th>排序</th>\n")
+                  .append("                </tr>\n")
+                  .append("                </thead>\n")
+                  .append("                <tbody>");
+
+        String[] tableCSS = {"active", "success", "danger", "warning"};
+
+        //查询全部记录
+        List<GoodsType8JPA> goodsType8JPAList = (List<GoodsType8JPA>)
+                  findAll().getSearchList();
+
+        for (int i = 0; i < goodsType8JPAList.size(); i++)
+        {
+            GoodsType8JPA goodsType8JPA = goodsType8JPAList.get(i);
+
+            String td_parent = "";
+            GoodsType8JPA parent = goodsType8JPA.getParentType();
+
+            if (parent == null)
+            {
+                td_parent = "对应上级类型为空!";
+            }
+            else
+            {
+                td_parent = parent.toString();
+            }
+
+            sb.append("                <tr class=\"");
+            if (i == 1) sb.append(tableCSS[0]);
+            if (i == 2) sb.append(tableCSS[1]);
+            if (i == 3)
+            {
+                sb.append(tableCSS[2]);
+            }
+            else
+            {
+                sb.append(tableCSS[3]);
+            }
+            sb
+                      .append("\">\n")
+                      .append("                    <td>1</td>\n")
+                      .append("                    <td>1</td>\n")
+                      .append("                    <td>")
+                      .append(goodsType8JPA.getTypeName())
+                      .append("</td>\n")
+                      .append("                    <td>")
+                      .append(td_parent)
+                      .append("</td>\n")
+                      .append("                    <td>")
+                      .append(goodsType8JPA.getTypeAlias())
+                      .append("</td>\n")
+                      .append("                    <td>")
+                      .append(goodsType8JPA.getTypeSort())
+                      .append("</td>\n")
+                      .append("                </tr>");
+        }
+
+        sb.append("                </tbody>\n").append("            </table>");
 
         return sb.toString();
     }
@@ -325,7 +421,7 @@ public class GoodsTypeDAOImpl
         {
 
             //判断是否有上下级
-            if (parent == null && childrenSet == null)
+            if (parent.getTypeName() == null && childrenSet.size() == 0)
             {
                 getSession().save(goodsType8);
             }
@@ -337,7 +433,7 @@ public class GoodsTypeDAOImpl
                       .append(goodsType8);
 
             //如果有上级
-            if (parent != null)
+            if (parent.getTypeName() != null)
             {
                 msg.append(" GoodsType8JPA ")
                           .append(parent);
@@ -365,7 +461,13 @@ public class GoodsTypeDAOImpl
             msg.append(")").append(daoEnd);
 
             getSession().save(goodsType8);
-            getSession().update(parent);
+            if (parent.getTypeName() != null) getSession().update(parent);
+            /*
+            String s = "goodsType8.setTypeAlias(\"" + goodsType8.getTypeAlias() + "\");\n" +
+                      "            goodsType8.setTypeSort(" + goodsType8.getTypeSort() + ");\n" +
+                      "            goodsType8.setTypeName(\"" + goodsType8.getTypeName() + "\");";
+            System.out.println(s);
+            */
             getTransaction().commit();
 
             superLogInfo("添加商品类型记录成功!");
