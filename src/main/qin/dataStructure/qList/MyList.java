@@ -22,4 +22,26 @@ public interface MyList<E> extends ShopBaseSupport
      */
     E get(int index);
     //endregion
+
+    //region 新增元素
+
+    /**
+     * 新增元素
+     *
+     * @param index 添加到哪里去
+     * @param data  要添加的数据
+     */
+    default void add(int index, int data)
+    {
+    }
+    //endregion
+
+    //region 插入头结点
+
+    /**
+     * 插入头结点
+     * @param data 数据
+     */
+    default void addFirst(int data){}
+    //endregion
 }

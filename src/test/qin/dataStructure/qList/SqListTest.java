@@ -1,8 +1,7 @@
 package qin.dataStructure.qList;
 
 import org.junit.Test;
-
-import java.util.ArrayList;
+import qin.dataStructure.chain.SingleLinkedList;
 
 /**
  * Created by Administrator on 2017/7/28 0028-28.<br/>
@@ -11,14 +10,17 @@ import java.util.ArrayList;
  */
 public class SqListTest
 {
-
     @Test
     public void get() throws Exception
     {
-        ArrayList arrayList = new ArrayList();
-        System.out.println(arrayList);
-        MySqList<Integer> mySqList = new
-                  MySqList<>(new Integer[]{1, 2, 3, 4, 5});
+        SingleLinkedList singleLinkedList = new SingleLinkedList();
+        singleLinkedList.addFirst(1);
+        singleLinkedList.addFirst(2);
+        singleLinkedList.add(1, 1);
+        System.out.println(singleLinkedList);
+
+        //LinkedList<Integer> integers = new LinkedList<>();
+        //integers.add(1, 1);
     }
 
 

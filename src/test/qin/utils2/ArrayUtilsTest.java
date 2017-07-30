@@ -2,7 +2,9 @@ package qin.utils2;
 
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.Stack;
 
 /**
  * Created by Administrator on 2017/7/27 0027-27.<br/>
@@ -20,7 +22,9 @@ public class ArrayUtilsTest implements ArrayUtils
         {
             System.out.println(b[i]);
         }
-        Arrays arrays;
+
+        Stack stack;
+        Set set = new LinkedHashSet();
     }
 
 }

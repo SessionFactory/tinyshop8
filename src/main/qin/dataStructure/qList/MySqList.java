@@ -8,6 +8,7 @@ import java.util.Arrays;
  * @author qinzhengying
  * @since 1.8 2017/7/
  */
+@Deprecated
 public class MySqList<E> implements MyList<E>
 {
     //region 提供构造函数

@@ -10,6 +10,7 @@ import static qin.dataStructure.qList.Status.MAXSIZE;
  * @since 1.8 2017/7/24
  */
 @SuppressWarnings("all")
+@Deprecated
 public class SqList<E> implements MyList<E>
 {
     private static final long serialVersionUID = 6054086044751182752L;
