@@ -12,6 +12,7 @@
         <mapping class="qin.tinyshop8.domain8.jpa.Goods8JPA"/>
         <mapping class="qin.tinyshop8.domain8.jpa.GoodsBrand8JPA"/>
         <mapping class="qin.tinyshop8.domain8.jpa.GoodsType8JPA"/>
+        <mapping class="qin.tinyshop8.domain8.jpa.User8JPA"/>
 
     </session-factory>
 

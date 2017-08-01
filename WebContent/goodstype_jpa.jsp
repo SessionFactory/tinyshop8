@@ -26,7 +26,8 @@
                     //var parent = $('#parent option:selected')[0].innerText;
                     var parent = 0;
                     var _select = $('#parent option:selected')[0];
-                    if (_select != undefined) {
+                    if (_select != undefined)
+                    {
                         parent = _select.innerText;
                     }
 
