@@ -40,8 +40,11 @@ public interface MyList<E> extends ShopBaseSupport
 
     /**
      * 插入头结点
+     *
      * @param data 数据
      */
-    default void addFirst(int data){}
+    default void addFirst(int data)
+    {
+    }
     //endregion
 }

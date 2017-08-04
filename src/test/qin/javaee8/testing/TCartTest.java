@@ -9,7 +9,11 @@ import java.util.List;
 
 public class TCartTest implements ShopBaseSupport
 {
-    @Test
+    @Test public void md5Test() {
+        System.out.println(string2MD5("123456"));
+    }
+
+    //@Test
     public void cart() throws Exception
     {
         List<TCart> cartList = new ArrayList<>();

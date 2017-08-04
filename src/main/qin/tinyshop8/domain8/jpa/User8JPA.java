@@ -81,7 +81,7 @@ public class User8JPA extends SuperLongEntity
 
     private String password;
 
-    @Column(name = "password", length = 10, nullable = true)
+    @Column(name = "password", length = 20, nullable = true)
     public String getPassword()
     {
         return password;
