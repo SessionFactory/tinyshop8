@@ -121,7 +121,7 @@ public class UserDAOImpl
                 //执行新增
                 //然后用户名不能在表中已存在
                 List<User8JPA> searchList = getSession()
-                          .createQuery("from User8JPA where username=:")
+                          .createQuery("from User8JPA where username=:username ")
                           .setParameter("username", username)
                           .list();
                 if (searchList.size() == 1)
