@@ -1,0 +1,273 @@
+package qin.tinyshop8_page.controller.impl;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import qin.tinyshop8.domain8.jpa.Goods8JPA;
+import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
+import qin.tinyshop8.domain8.jpa.User8JPA;
+import qin.tinyshop8_page.controller._abstract.TinyShop8ControllerImpl;
+import qin.tinyshop8_page.service.UserService;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2017/8/5 0005-5.<br/>
+ * 商品控制层实现类
+ *
+ * @author qinzhengying
+ * @since 1.8 2017/8/5
+ */
+@Controller(value = "_TinyShop8Controller")
+@Scope("prototype")
+@RequestMapping(value = "/tinyshop8")
+@SuppressWarnings("all")
+public class TinyShop8Controller_
+          extends TinyShop8ControllerImpl
+{
+    private static final long serialVersionUID = 377255544027903955L;
+
+    //region 返回首页
+
+    /**
+     * 返回tinyshop8的首页
+     *
+     * @return 将页面返回
+     */
+    @RequestMapping(value = "/doMainView")
+    @Override
+    public ModelAndView doMainView()
+    {
+        return super.doMainView();
+    }
+
+    //endregion
+
+    //region 显示所有商品信息
+
+    /**
+     * 显示所有商品信息
+     *
+     * @param response
+     */
+    //@RequestMapping(value = "/showAllGoods")
+    @Deprecated
+    @Override
+    public void showAllGoods(HttpServletResponse response)
+    {
+        try
+        {
+            //首先查询所有商品信息
+            final List<Goods8JPA> goodsList = goodsService
+                      .findAll();
+
+            if (goodsList.size() == 0)
+            {
+                throw new
+                          Exception("TinyShop8Controller_.查询所有商品信息失败!并没有任何商品信息");
+            }
+
+            //写入json
+            JSONArray jsonArray = new JSONArray();
+
+            for (Iterator<Goods8JPA> it = goodsList.iterator(); it.hasNext(); )
+            {
+                JSONObject jsonObject = new JSONObject();
+
+                Goods8JPA goods = it.next();
+
+                //名称
+                jsonObject.put("goodsName", goods.getGoodsName());
+                //编号
+                jsonObject.put("goodsProNo", goods.getGoodsProNo());
+                //添加时间
+                jsonObject.put("goodsAddDate", goods.getGoodsAddDate());
+                //市场价
+                jsonObject.put("goodsMarketPrice", goods.getGoodsMarketPrice());
+                //所属类型
+                jsonObject.put("goodsType", "type");
+                //品牌
+                jsonObject.put("goodsBrand", "brand");
+
+                jsonArray.add(jsonObject);
+            }
+
+            String baseStr = "{\"total\":" + goodsList.size() + ",\"rows\":";
+            baseStr = baseStr + jsonArray.toString() + "}";
+            returnJson(baseStr, response);
+        }
+        catch (Exception ex)
+        {
+            printStackTrace(ex);
+        }
+    }
+    //endregion
+
+    //region 显示所有商品类型信息
+
+    /**
+     * 显示所有商品类型信息
+     *
+     * @param response
+     */
+    @RequestMapping(value = "/showAllGoodsType")
+    @Override
+    public void showAllGoodsType(HttpServletResponse response)
+    {
+        try
+        {
+            //查询全部商品类型信息
+            List<GoodsType8JPA> goodsTypeList = goodsTypeService
+                      .findAll();
+
+            if (goodsTypeList.size() == 0)
+            {
+                throw new
+                          Exception("TinyShop8Controller_." +
+                                              "查询所有商品类型信息失败!并没有任何商品类型信息");
+            }
+
+            //写入json
+            JSONArray jsonArray = new JSONArray();
+
+            for (Iterator<GoodsType8JPA> it = goodsTypeList.iterator(); it.hasNext(); )
+            {
+                JSONObject jsonObject = new JSONObject();
+
+                GoodsType8JPA goodsType = it.next();
+
+                //名字
+                jsonObject.put("goodsTypeName", goodsType.getTypeName());
+                //排序
+                jsonObject.put("goodsTypeSort", goodsType.getTypeSort());
+                //别名
+                jsonObject.put("goodsTypeAlias", goodsType.getTypeAlias());
+                //上级类型
+                jsonObject.put("goodsParent", "parent");
+
+                jsonArray.add(jsonObject);
+            }
+
+            String baseStr = "{\"total\":" + goodsTypeList.size() + ",\"rows\":";
+            baseStr = baseStr + jsonArray.toString() + "}";
+            returnJson(baseStr, response);
+        }
+        catch (Exception ex)
+        {
+            printStackTrace(ex);
+        }
+    }
+    //endregion
+
+    //region 显示所有商品品牌信息
+
+    /**
+     * 显示所有商品品牌信息
+     *
+     * @param response
+     */
+    @Override
+    public void showAllGoodsBrand(HttpServletResponse response)
+    {
+        try
+        {
+        }
+        catch (Exception ex)
+        {
+            printStackTrace(ex);
+        }
+    }
+    //endregion
+
+    //region 根据用户查找商品信息
+
+    //region 注入用户服务层
+    private UserService userService;
+
+    @Resource
+    public final void setUserService(UserService userService)
+    {
+        this.userService = userService;
+    }
+    //endregion
+
+    /**
+     * 根据登录的用户查找商品信息<br>
+     * 每个用户对应多个商品, 并不需要将所有的商品信息都显示出来,
+     * 根据登录的用户去查找对应的商品然后将它的商品信息打印出来即可
+     *
+     * @param user     登录的用户信息
+     * @param response 回复
+     */
+    @RequestMapping(value = "/showAllGoods")
+    @Override
+    public void showAllGoods(User8JPA user, HttpServletResponse response)
+    {
+        try
+        {
+            //判断用户是否为空, 为空就直接抛出异常
+            if (user == null)
+            {
+                returnJson("请先登录再访问此页,  谢谢!", response);
+                return;
+            }
+
+            //首先接收用户名
+            String username = trim(user.getUsername());
+            //然后直接根据用户名查询商品信息
+
+            //首先查询所有商品信息
+            final List<Goods8JPA> goodsList = goodsService
+                      .findGoodsByUser(username);
+
+            if (goodsList.size() == 0)
+            {
+                throw new
+                          Exception("TinyShop8Controller_.查询所有商品信息失败!并没有任何商品信息");
+            }
+
+            //写入json
+            JSONArray jsonArray = new JSONArray();
+
+            for (Iterator<Goods8JPA> it = goodsList.iterator(); it.hasNext(); )
+            {
+                JSONObject jsonObject = new JSONObject();
+
+                Goods8JPA goods = it.next();
+
+                //名称
+                jsonObject.put("goodsName", goods.getGoodsName());
+                //编号
+                jsonObject.put("goodsProNo", goods.getGoodsProNo());
+                //添加时间
+                jsonObject.put("goodsAddDate", goods.getGoodsAddDate());
+                //市场价
+                jsonObject.put("goodsMarketPrice", goods.getGoodsMarketPrice());
+                //所属类型
+                jsonObject.put("goodsType", "type");
+                //品牌
+                jsonObject.put("goodsBrand", "brand");
+
+                jsonArray.add(jsonObject);
+            }
+
+            String baseStr = "{\"total\":" + goodsList.size() + ",\"rows\":";
+            baseStr = baseStr + jsonArray.toString() + "}";
+            returnJson(baseStr, response);
+        }
+        catch (Exception ex)
+        {
+            printStackTrace(ex);
+        }
+    }
+
+    //endregion
+
+
+}

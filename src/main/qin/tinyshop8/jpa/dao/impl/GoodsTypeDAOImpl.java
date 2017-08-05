@@ -20,7 +20,7 @@ import java.util.Set;
  * @author qinzhengying
  * @since 1.8 2017/7/22
  */
-@Repository
+@Repository(value = "_GoodsTypeDAOImpl")
 @SuppressWarnings("all")
 public class GoodsTypeDAOImpl
           extends ShopBasicDAOImpl<GoodsType8JPA, Long>

@@ -1,6 +1,5 @@
-package qin.tinyshop8.jpa.dao;
+package qin.tinyshop8_page.service;
 
-import qin.javaee8.core.dao.DAOSupport8;
 import qin.javaee8.core.exceptions.dao.DataAccessException;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
 import qin.tinyshop8.utils.ShopBaseSupport;
@@ -8,14 +7,25 @@ import qin.tinyshop8.utils.ShopBaseSupport;
 import java.util.List;
 
 /**
- * 商品jpa数据访问层
+ * Created by Administrator on 2017/8/5 0005-5.<br/>
+ * 商品服务层
  *
  * @author qinzhengying
- * @since 1.8 2017/7/22
+ * @since 1.8 2017/8/5
  */
-public interface GoodsDAO extends DAOSupport8<Goods8JPA, Long>,
-          ShopBaseSupport
+public interface GoodsService extends ShopBaseSupport
 {
+    //region 查询所有商品信息
+
+    /**
+     * 查询所有商品信息
+     *
+     * @return 返回查询集合
+     * @throws DataAccessException 抛出数据访问层大异常
+     */
+    List<Goods8JPA> findAll() throws DataAccessException;
+    //endregion
+
     //region 根据用户查询商品信息
 
     /**

@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import qin.tinyshop8.domain8.jpa.User8JPA;
 import qin.tinyshop8.utils.ShopBaseSupport;
-import qin.tinyshop8_page.dao.UserDAO;
+import qin.tinyshop8_page.controller.TinyShop8Controller;
 
 /**
  * Created by Administrator on 2017/8/4 0004-4.<br/>
@@ -19,11 +19,14 @@ public class UserDAOImplTest implements ShopBaseSupport
     {
         ApplicationContext applicationContext = new
                   ClassPathXmlApplicationContext("applicationContext.xml");
-        UserDAO userDAO = (UserDAO) applicationContext
+        TinyShop8Controller controller = (TinyShop8Controller)
+                  applicationContext.getBean("_TinyShop8Controller");
+        controller.showAllGoods(new User8JPA("administrator", ""), null);
+        /*UserDAO userDAO = (UserDAO) applicationContext
                   .getBean("userDAOImpl");
         User8JPA user8JPA = new User8JPA("root", "root");
         //superLogInfo(userDAO.findUser(user8JPA));
-        superLogInfo(userDAO.registerUser(new User8JPA("tinyshop", "tinyshop")));
+        superLogInfo(userDAO.registerUser(new User8JPA("tinyshop", "tinyshop")));*/
     }
 
 }
