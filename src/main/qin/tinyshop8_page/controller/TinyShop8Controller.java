@@ -5,6 +5,7 @@ import qin.tinyshop8.domain8.jpa.User8JPA;
 import qin.tinyshop8.utils.MainViewSupport;
 import qin.tinyshop8.utils.ShopBaseSupport;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -94,8 +95,10 @@ public interface TinyShop8Controller extends ShopBaseSupport,
      *
      * @param user     登录的用户信息
      * @param response 回复
+     * @param request  请求
      */
-    void showAllGoods(User8JPA user, HttpServletResponse response);
+    void showAllGoods(User8JPA user, HttpServletResponse response,
+                      HttpServletRequest request);
     //endregion
 
     //endregion

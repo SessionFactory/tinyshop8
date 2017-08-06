@@ -8,6 +8,7 @@ import qin.tinyshop8.domain8.jpa.User8JPA;
 import qin.tinyshop8_page.service.UserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -51,7 +52,8 @@ public class IndexController extends BaseController
      * @param response 回复
      */
     @RequestMapping(value = "/doLogin")
-    public void doLogin(User8JPA user, HttpServletResponse response)
+    public void doLogin(User8JPA user, HttpServletResponse response,
+                        HttpServletRequest request)
     {
         try
         {
@@ -61,6 +63,7 @@ public class IndexController extends BaseController
             //现在可以查询了(判断是否查询成功)
             if (userService.findUser(user))
             {
+                request.getSession().setAttribute("password", "password");
                 returnJson(str_success, response);
             }
             else

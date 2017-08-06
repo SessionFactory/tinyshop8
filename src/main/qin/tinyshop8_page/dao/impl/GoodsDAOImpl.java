@@ -1,9 +1,9 @@
-package qin.tinyshop8.jpa.dao.impl;
+package qin.tinyshop8_page.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import qin.javaee8.core.exceptions.dao.DataAccessException;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
-import qin.tinyshop8.jpa.dao.GoodsDAO;
+import qin.tinyshop8_page.dao.GoodsDAO;
 import qin.tinyshop8.utils.ShopBasicDAOImpl;
 
 import java.util.Collections;

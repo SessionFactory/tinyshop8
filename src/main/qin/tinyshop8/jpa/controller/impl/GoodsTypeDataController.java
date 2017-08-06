@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
-import qin.tinyshop8.jpa.dao.GoodsTypeDAO;
+import qin.tinyshop8_page.dao.GoodsTypeDAO;
 import qin.tinyshop8.utils.ShopBaseSupport;
 
 import javax.annotation.Resource;

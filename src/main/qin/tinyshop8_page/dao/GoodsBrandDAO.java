@@ -1,4 +1,4 @@
-package qin.tinyshop8.jpa.dao;
+package qin.tinyshop8_page.dao;
 
 import qin.javaee8.core.dao.DAOSupport8;
 import qin.tinyshop8.domain8.jpa.GoodsBrand8JPA;

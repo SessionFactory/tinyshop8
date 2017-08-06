@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import qin.javaee8.core.exceptions.dao.DataAccessException;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
-import qin.tinyshop8.jpa.dao.GoodsDAO;
+import qin.tinyshop8_page.dao.GoodsDAO;
 import qin.tinyshop8_page.service.GoodsService;
 
 import javax.annotation.Resource;

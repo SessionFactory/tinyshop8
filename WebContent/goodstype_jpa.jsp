@@ -1,7 +1,7 @@
 <%@ page import="org.springframework.context.ApplicationContext" %>
 <%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
 <%@ page import="qin.tinyshop8.domain8.jpa.GoodsType8JPA" %>
-<%@ page import="qin.tinyshop8.jpa.dao.GoodsTypeDAO" %>
+<%@ page import="qin.tinyshop8_page.dao.GoodsTypeDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>

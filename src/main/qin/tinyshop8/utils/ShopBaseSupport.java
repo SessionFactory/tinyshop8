@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import qin.javaee8.core.JavaEE8BaseSupport;
 
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
 
 /**
  * 商城最顶层接口
@@ -92,6 +93,14 @@ public interface ShopBaseSupport extends JavaEE8BaseSupport
         return hexValue.toString();
 
     }
+    //endregion
+
+    //region 定义格式化时间变量
+    /**
+     * 定义格式化时间变量
+     */
+    SimpleDateFormat simpleDataFormat =
+              new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     //endregion
 }
 

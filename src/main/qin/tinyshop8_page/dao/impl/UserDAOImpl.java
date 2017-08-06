@@ -1,6 +1,5 @@
 package qin.tinyshop8_page.dao.impl;
 
-import org.hibernate.Criteria;
 import org.springframework.stereotype.Repository;
 import qin.javaee8.core.exceptions.dao.DataAccessException;
 import qin.javaee8.core.exceptions.dao.DuplicateInsertKeyDataAccessException;
@@ -11,8 +10,6 @@ import qin.tinyshop8.utils.ShopBasicDAOImpl;
 import qin.tinyshop8_page.dao.UserDAO;
 
 import java.util.List;
-
-import static org.hibernate.criterion.Restrictions.eq;
 
 /**
  * Created by Administrator on 2017/8/3 0003-3.<br/>
@@ -63,33 +60,21 @@ public class UserDAOImpl
     @Override
     public boolean findUser(User8JPA user) throws DataAccessException
     {
-        Criteria criteria = getSession().createCriteria(getEntityClass());
-        //根据用户名和密码进行查询
-        String username = user.getUsername();
-        String password = user.getPassword();
+        List<User8JPA> userList = getSession()
+                  .createQuery("from User8JPA where " +
+                                         " username=:username and " +
+                                         " password=:password ")
+                  .setParameter("username", user.getUsername())
+                  .setParameter("password", user.getPassword())
+                  .list();
 
-        if (checkStringLength(username) && checkStringLength(password))
+        if (userList.size() != 1)
         {
-            //进行查询
-            criteria.add(eq("username", username))
-                      .add(eq("password", password));
-            List<User8JPA> userList = criteria.list();
-            if (userList.size() == 1)
-            {
-                //说明查询成功
-                return true;
-            }
-            else
-            {
-                //就是没有查询成功
-                throw new EmptyResultDataAccessException("用户名或密码查找失败, 登录失败!");
-            }
+            throw new
+                      EmptyResultDataAccessException("用户登录失败!");
         }
-        else
-        {
-            //抛出异常
-            throw new DataAccessException("用户名或密码为空, 无法登录!");
-        }
+
+        return true;
     }
     //endregion
 

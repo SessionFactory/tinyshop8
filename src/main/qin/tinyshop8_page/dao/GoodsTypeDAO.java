@@ -1,4 +1,4 @@
-package qin.tinyshop8.jpa.dao;
+package qin.tinyshop8_page.dao;
 
 import org.hibernate.LockMode;
 import org.hibernate.Session;

@@ -12,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import qin.javaee8.core.support.FrameWorkDSCResult;
 import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
+import qin.tinyshop8_page.dao.GoodsTypeDAO;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -32,7 +33,8 @@ public class GoodsTypeDAOTest
 
 }
 
-abstract class DAOImpl implements GoodsTypeDAO {
+abstract class DAOImpl implements GoodsTypeDAO
+{
 
     /**
      * 根据批量主键查询记录, 这个需要子类去实现

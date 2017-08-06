@@ -9,21 +9,24 @@
     //endregion
 
     //region 页面一开始就要运行的方法
-    $(function () {
-            //region 登录实现
-            $('#doLogin').click(function () {
-                    login();
-                }
-            );
-            //endregion
+    $(function ()
+            {
+                //region 登录实现
+                $('#doLogin').click(function ()
+                        {
+                            login();
+                        }
+                );
+                //endregion
 
-            //region 注册实现
-            $('#doRegister').click(function () {
-                    register();
-                }
-            );
-            //endregion
-        }
+                //region 注册实现
+                $('#doRegister').click(function ()
+                        {
+                            register();
+                        }
+                );
+                //endregion
+            }
     );
     //endregion
 
@@ -41,17 +44,23 @@
         checkUser(username, password);
 
         var url = basePath + "doLogin.com?username=" + username +
-            "       &&password=" + password;
+                "       &&password=" + password;
 
         //将用户名和密码传送到后台实现登录
-        $.ajax(
-            {
-                url: url,
-                method: 'POST',
-                success: function (msg) {
-                    alert(msg);
+        $.ajax
+        (
+                {
+                    url: url,
+                    method: 'POST',
+                    success: function (msg)
+                    {
+                        if (msg === "success")
+                        {
+                            window.location.href = "/tinyshop8/doMainView2.com?" +
+                                    "username=" + username;
+                        }
+                    }
                 }
-            }
         );
     }
 
@@ -71,17 +80,18 @@
         checkUser(username, password);
 
         var url = basePath + "doRegister.com?username=" + username +
-            "       &&password=" + password;
+                "       &&password=" + password;
 
         //将用户名和密码传送到后台实现登录
         $.ajax(
-            {
-                url: url,
-                method: 'POST',
-                success: function (msg) {
-                    alert(msg);
+                {
+                    url: url,
+                    method: 'POST',
+                    success: function (msg)
+                    {
+                        alert(msg);
+                    }
                 }
-            }
         );
     }
 

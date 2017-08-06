@@ -13,6 +13,7 @@ import qin.tinyshop8_page.controller._abstract.TinyShop8ControllerImpl;
 import qin.tinyshop8_page.service.UserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +44,12 @@ public class TinyShop8Controller_
     @RequestMapping(value = "/doMainView")
     @Override
     public ModelAndView doMainView()
+    {
+        return super.doMainView();
+    }
+
+    @RequestMapping(value = "/doMainView2")
+    public ModelAndView doMainView2(User8JPA user)
     {
         return super.doMainView();
     }
@@ -207,10 +214,18 @@ public class TinyShop8Controller_
      */
     @RequestMapping(value = "/showAllGoods")
     @Override
-    public void showAllGoods(User8JPA user, HttpServletResponse response)
+    public void showAllGoods(User8JPA user, HttpServletResponse response,
+                             HttpServletRequest request)
     {
         try
         {
+            //直接输入地址不可以访问
+            if (request.getSession().getAttribute("password") == null)
+            {
+                returnJson("清先登录!", response);
+                //throw new ServletException("请先登录!");
+            }
+
             //判断用户是否为空, 为空就直接抛出异常
             if (user == null)
             {
@@ -241,6 +256,8 @@ public class TinyShop8Controller_
 
                 Goods8JPA goods = it.next();
 
+                //编号
+                jsonObject.put("goodsId", goods.getId());
                 //名称
                 jsonObject.put("goodsName", goods.getGoodsName());
                 //编号
@@ -249,10 +266,26 @@ public class TinyShop8Controller_
                 jsonObject.put("goodsAddDate", goods.getGoodsAddDate());
                 //市场价
                 jsonObject.put("goodsMarketPrice", goods.getGoodsMarketPrice());
+                String type = "";
+                GoodsType8JPA goodsType = goods.getGoodsType();
+                if (goodsType == null)
+                {
+                    //language=html
+                    type = new StringBuilder()
+                              .append("<font style='color: red; font-weight: lighter; '>")
+                              .append("所对应的商品类型为空!</font>").toString();
+                }
+                else
+                {
+                    type = new StringBuilder()
+                              .append("<font style='color: blue;'>")
+                              .append(goodsType.getTypeName())
+                              .append("</font>").toString();
+                }
                 //所属类型
-                jsonObject.put("goodsType", "type");
+                jsonObject.put("goodsType", type);
                 //品牌
-                jsonObject.put("goodsBrand", "brand");
+                jsonObject.put("goodsBrand", "暂未开通此服务!");
 
                 jsonArray.add(jsonObject);
             }

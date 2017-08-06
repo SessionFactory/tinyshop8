@@ -21,7 +21,7 @@ public class UserDAOImplTest implements ShopBaseSupport
                   ClassPathXmlApplicationContext("applicationContext.xml");
         TinyShop8Controller controller = (TinyShop8Controller)
                   applicationContext.getBean("_TinyShop8Controller");
-        controller.showAllGoods(new User8JPA("administrator", ""), null);
+        controller.showAllGoods(new User8JPA("administrator", ""), null, null);
         /*UserDAO userDAO = (UserDAO) applicationContext
                   .getBean("userDAOImpl");
         User8JPA user8JPA = new User8JPA("root", "root");
