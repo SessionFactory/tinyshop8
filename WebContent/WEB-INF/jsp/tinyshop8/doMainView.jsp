@@ -10,6 +10,34 @@
     <jsp:include page="js/doMainViewJS.jsp"></jsp:include>
 </head>
 
+<%--
+     顶部工具栏
+
+        增删改查
+
+
+     新增商品信息:
+     1.根据已登录的用户来实现新增功能
+     2.弹出新增对话框
+        {
+            goodsName, nullable(400)
+            goodsAddDate, nullable
+            goodsCostPrice, nullable
+            godosMarketPrice, nullable
+            goodsProNo, nullable(50)
+            goodsSellPrice, nullable
+            goodsStoreNums, nullable
+            goodsNo, 300
+            goodsWeight, nullable(10)
+            goodsSubTitle, 800
+            goodsType
+            goodsImgsList 多个文本框(提供5个)
+            goodsKeyWords 根据逗号分隔
+        }
+
+     3.实现新增
+--%>
+
 <body class="easyui-layout" style="width:100%;height:100%;font-family: 微软雅黑;">
 <div data-options="region:'east',split:true" title="消息框" style="width:100px;"></div>
 <div data-options="region:'west',split:true" title="导航" style="width:100px;"></div>
@@ -45,7 +73,27 @@
         </thead>
     </table>
 
+    <%-- 工具栏 --%>
+    <div id="toolbar">
+        <a id="btn_add" class="easyui-linkbutton c1" data-options="iconCls:'icon-add'">
+            新增商品信息
+        </a>
+        　
+        <a id="btn_delete" class="easyui-linkbutton c2" data-options="iconCls:'icon-cut'">
+            删除商品信息
+        </a>
+        　
+        <a id="btn_search" class="easyui-linkbutton c3" data-options="iconCls:'icon-search'">
+            查找商品信息
+        </a>
+    </div>
 
 </div>
 </body>
+
+<%--
+空格
+[　]
+--%>
+
 </html>

@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  *
  * @author qinzhengying
  */
+@Deprecated
 public class IniGoodsDataTest
 {
     @Test

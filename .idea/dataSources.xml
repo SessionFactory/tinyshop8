@@ -15,5 +15,11 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="tongange" uuid="e21f9003-e8ea-49a6-af0d-ac5290dbc201">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@localhost:1521:orcl</jdbc-url>
+    </data-source>
   </component>
 </project>

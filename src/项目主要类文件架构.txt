@@ -1,0 +1,12 @@
+新的测试类都在test2包里
+
+实体类
+   最新的用户商品关联的实体类jpa
+   package qin.tinyshop8.domain8.jpa;
+保存数据
+
+package qin.tinyshop8_page.controller;
+|--IniGoodsUser 保存用户所对应的商品
+商品类型也保存了
+
+

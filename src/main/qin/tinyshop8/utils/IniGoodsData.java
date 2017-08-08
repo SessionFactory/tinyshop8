@@ -18,6 +18,7 @@ import java.util.List;
  * @since 1.8 2017/7/16
  */
 @Repository
+@Deprecated
 public class IniGoodsData implements ShopBaseSupport,
           SessionBasic
 {
