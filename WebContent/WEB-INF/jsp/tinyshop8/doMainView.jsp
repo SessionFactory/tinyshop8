@@ -1,3 +1,6 @@
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
+<%@ page import="qin.tinyshop8_page.controller.TinyShop8Controller" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -75,7 +78,8 @@
 
     <%-- 工具栏 --%>
     <div id="toolbar">
-        <a id="btn_add" class="easyui-linkbutton c1" data-options="iconCls:'icon-add'">
+        <a id="btn_add" class="easyui-linkbutton c1" data-options="iconCls:'icon-add'"
+           onclick="openAddDialog()">
             新增商品信息
         </a>
         　
@@ -87,6 +91,131 @@
             查找商品信息
         </a>
     </div>
+
+    <%-- 新增对话框 --%>
+    <div id="addGoods_dialog">
+        <style type="text/css">
+            input
+            {
+                font-family: 微软雅黑;
+            }
+
+            .textbox
+            {
+                border: 1px solid brown;
+            }
+
+            .textbox textarea.textbox-text
+            {
+                white-space: pre-wrap;
+                font-family: 微软雅黑;
+            }
+
+        </style>
+
+        <body style="font-family: 微软雅黑; font-size: 16px;">
+        <div class="easyui-panel" title="新增商品" style="width:100%;padding:30px 60px">
+            <div style="margin-bottom:20px">
+                <div>商品名称(nullable, 400)</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsName">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品新增日期(nullable)</div>
+                <input class="easyui-datetimebox" style="width:50%;height: 32px;" \
+                       id="goodsAddDate">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品成本价(nullable)</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsCostPrice">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品市场价(nullable)</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsMarketPrice">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品编号(nullable, 50)</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsProNo">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品销售价格(nullable)</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsSellPrice">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品库存(nullable)</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsStoreNums">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品编码</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsNo">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品重量</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsWeight">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品副标题(800)</div>
+                <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                       id="goodsSubTitle">
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品类型(nullable)</div>
+                <div id="div_goodsType">
+                    <select class="easyui-combobox" id="goodsType" style="width:500px;">
+                        <%
+                            ApplicationContext applicationContext = new
+                                    ClassPathXmlApplicationContext("applicationContext.xml");
+                            TinyShop8Controller tinyShop8Controller =
+                                    (TinyShop8Controller) applicationContext
+                                            .getBean("_TinyShop8Controller");
+                            out.println(tinyShop8Controller.showGoodsTypeCombobox());
+                        %>
+                    </select>
+                </div>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品图片</div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                           id="goodsImgs1">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                           id="goodsImgs2">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                           id="goodsImgs3">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                           id="goodsImgs4">
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" style="width:100%;height:32px" type="text"
+                           id="goodsImgs5">
+                </div>
+            </div>
+            <div style="margin-bottom:20px">
+                <div>商品关键词</div>
+                <input class="easyui-textbox" data-options="multiline:true"
+                       style="width:100%;height:100px;" id="goodsKeyWords" type="text">
+            </div>
+            <div>
+                <a href="#" class="easyui-linkbutton c4" iconCls="icon-add"
+                   style="width:100%;height:32px" onclick="addGoods()">新增</a>
+            </div>
+        </div>
+        </body>
+    </div>
+    <%-- 新增对话框 --%>
 
 </div>
 </body>

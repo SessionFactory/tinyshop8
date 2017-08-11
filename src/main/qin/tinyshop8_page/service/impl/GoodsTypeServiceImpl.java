@@ -45,7 +45,8 @@ public class GoodsTypeServiceImpl implements GoodsTypeService
     @Override
     public List<GoodsType8JPA> findAll() throws DataAccessException
     {
-        return (List<GoodsType8JPA>) goodsTypeDAO.findAll().getSearchList();
+        return (List<GoodsType8JPA>) goodsTypeDAO
+                  .findAll().getSearchList();
     }
     //endregion
 }

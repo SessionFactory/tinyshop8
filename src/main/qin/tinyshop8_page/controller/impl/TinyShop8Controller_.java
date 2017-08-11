@@ -302,5 +302,50 @@ public class TinyShop8Controller_
 
     //endregion
 
+    //region 二期(一期改进 2017-8-11)
+
+    //region 显示商品类型信息
+
+    /**
+     * 显示商品类型<br>
+     *
+     * @return 将商品类型作为字符串返回
+     * @author qinzhengying
+     * @since 1.8 2017/8/11
+     */
+    //@RequestMapping(value = "/iniGoodsType")
+    @Override
+    public String showGoodsTypeCombobox()
+    {
+        try
+        {
+            //查询所有商品类型实体类信息
+            List<GoodsType8JPA> goodsTypeList = goodsTypeService
+                      .findAll();
+
+            //将排序后的商品类型名称写入前台页面
+            StringBuilder ajax = new StringBuilder();
+
+            for (Iterator<GoodsType8JPA> it = goodsTypeList.iterator();
+                      it.hasNext(); )
+            {
+                GoodsType8JPA e = it.next();
+                //language=html
+                ajax.append("<option>").append(e.getTypeName()).append("</option>");
+            }
+
+            return ajax.toString();
+        }
+        catch (Exception ex)
+        {
+            printStackTrace(ex);
+            return str_failed;
+        }
+    }
+
+    //endregion
+
+    //endregion
+
 
 }

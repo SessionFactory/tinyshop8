@@ -102,4 +102,20 @@ public interface TinyShop8Controller extends ShopBaseSupport,
     //endregion
 
     //endregion
+
+    //region 二期(一期改进 2017-8-11)
+
+    //region 显示商品类型(2017/8/11)
+
+    /**
+     * 显示商品类型<br>
+     *
+     * @return 将商品类型字符串返回
+     * @author qinzhengying
+     * @since 1.8 2017/8/11
+     */
+    String showGoodsTypeCombobox();
+    //endregion
+
+    //endregion
 }
