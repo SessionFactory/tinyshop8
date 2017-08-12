@@ -19,7 +19,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.REMOVE;
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 
 /**
@@ -90,7 +90,7 @@ public class GoodsType8JPA
      */
     private Set<Goods8JPA> goods8JPASet = new HashSet<>();
 
-    @OneToMany(targetEntity = Goods8JPA.class, cascade = REMOVE,
+    @OneToMany(targetEntity = Goods8JPA.class, cascade = ALL,
               fetch = EAGER)
     @JoinColumn(name = "join_goods_type_m2o", foreignKey =
     @ForeignKey(name = "fk_goods_type_m2o"))
@@ -113,7 +113,7 @@ public class GoodsType8JPA
      */
     private Set<GoodsType8JPA> childrenSet = new HashSet<>();
 
-    @OneToMany(targetEntity = GoodsType8JPA.class, cascade = REMOVE,
+    @OneToMany(targetEntity = GoodsType8JPA.class, cascade = ALL,
               fetch = EAGER)
     @JoinColumn(name = "join_goods_children_m2o", foreignKey =
     @ForeignKey(name = "fk_goods_children_m2o"))
@@ -136,7 +136,7 @@ public class GoodsType8JPA
      */
     private GoodsType8JPA parentType;
 
-    @ManyToOne(targetEntity = GoodsType8JPA.class, cascade = REMOVE,
+    @ManyToOne(targetEntity = GoodsType8JPA.class, cascade = ALL,
               fetch = EAGER)
     @JoinColumn(name = "parent_id", foreignKey =
     @ForeignKey(name = "fk_parent"))

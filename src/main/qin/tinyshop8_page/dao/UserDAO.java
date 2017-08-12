@@ -16,6 +16,20 @@ import qin.tinyshop8.utils.ShopBaseSupport;
 public interface UserDAO extends DAOSupport8<User8JPA, Long>,
           ShopBaseSupport
 {
+    //region 根据用户名查询用户信息
+
+    /**
+     * 根据用户名查询用户信息
+     *
+     * @param username 用户名
+     * @return 返回查询结果
+     * @throws DataAccessException 如果查询失败就抛出大异常
+     * @author qinzhengying
+     * @since 1.8 2017/8/12
+     */
+    User8JPA findUserByUserName(String username) throws DataAccessException;
+    //endregion
+
     //region 查询用户信息
 
     /**

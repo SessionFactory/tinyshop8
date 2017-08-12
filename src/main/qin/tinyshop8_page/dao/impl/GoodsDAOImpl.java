@@ -2,7 +2,10 @@ package qin.tinyshop8_page.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import qin.javaee8.core.exceptions.dao.DataAccessException;
+import qin.javaee8.core.support.FrameWorkDSCResult;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
+import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
+import qin.tinyshop8.domain8.jpa.User8JPA;
 import qin.tinyshop8.utils.ShopBasicDAOImpl;
 import qin.tinyshop8_page.dao.GoodsDAO;
 
@@ -72,5 +75,50 @@ public class GoodsDAOImpl
 
         return searchList;
     }
+    //endregion
+
+    //region 新增商品信息
+
+    /**
+     * 新增商品信息
+     *
+     * @param goods8     商品实体类
+     * @param goodsType8 商品类型实体类
+     * @return 返回新增具体类
+     */
+    @Override
+    public FrameWorkDSCResult addGoods(final Goods8JPA goods8,
+                                       final GoodsType8JPA goodsType8)
+    {
+        FrameWorkDSCResult result = new FrameWorkDSCResult();
+
+        try
+        {
+            User8JPA user = goods8.getUser8JPA();
+            user.getGoods8JPASet().add(goods8);
+            goods8.setUser8JPA(user);
+            goods8.setGoodsType(goodsType8);
+            goodsType8.getGoods8JPASet().add(goods8);
+
+            getSession().save(goods8);
+            //更新商品类型信息
+            getSession().merge(goodsType8);
+            getSession().merge(user);
+
+            getTransaction().commit();
+            result.setDaoFlag(true);
+        }
+        catch (Exception ex)
+        {
+            result.setDaoFlag(false);
+            printStackTrace(ex);
+            result.setDaoException(ex);
+        }
+        finally
+        {
+            return result;
+        }
+    }
+
     //endregion
 }

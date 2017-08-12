@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="tinyshop8@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="tinyshop8">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="dbshop"/>
+    <schema id="4" parent="1" name="destoon"/>
+    <schema id="5" parent="1" name="information_schema"/>
+    <schema id="6" parent="1" name="javaee8_201707"/>
+    <schema id="7" parent="1" name="javaweb1200"/>
+    <schema id="8" parent="1" name="mem_mgr"/>
+    <schema id="9" parent="1" name="mysql"/>
+    <schema id="10" parent="1" name="performance_schema"/>
+    <schema id="11" parent="1" name="phpmyadmin"/>
+    <schema id="12" parent="1" name="shopping"/>
+    <schema id="13" parent="1" name="slms"/>
+    <schema id="14" parent="1" name="slms6"/>
+    <schema id="15" parent="1" name="sys"/>
+    <schema id="16" parent="1" name="tinyshop"/>
+    <schema id="17" parent="1" name="x5"/>
+    <table id="18" parent="2" name="hibernate_sequence"/>
+    <table id="19" parent="2" name="jpa_goods"/>
+    <table id="20" parent="2" name="jpa_goods_brand_set"/>
+    <table id="21" parent="2" name="jpa_goods_children_set"/>
+    <table id="22" parent="2" name="jpa_goods_img_list"/>
+    <table id="23" parent="2" name="jpa_goods_type_set"/>
+    <table id="24" parent="2" name="jpa_goodsbrand"/>
+    <table id="25" parent="2" name="jpa_goodstype"/>
+    <column id="26" parent="18" name="next_val">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="27" parent="19" name="goods_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="19" name="addDate">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="29" parent="19" name="cost_price">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="30" parent="19" name="keyword">
+      <Position>4</Position>
+      <DataType>varchar(300)|0</DataType>
+    </column>
+    <column id="31" parent="19" name="market_price">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="32" parent="19" name="goodsname">
+      <Position>6</Position>
+      <DataType>varchar(400)|0</DataType>
+    </column>
+    <column id="33" parent="19" name="goods_no">
+      <Position>7</Position>
+      <DataType>varchar(300)|0</DataType>
+    </column>
+    <column id="34" parent="19" name="pro_no">
+      <Position>8</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="35" parent="19" name="sell_price">
+      <Position>9</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="36" parent="19" name="store_nums">
+      <Position>10</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="37" parent="19" name="subtitle">
+      <Position>11</Position>
+      <DataType>varchar(800)|0</DataType>
+    </column>
+    <column id="38" parent="19" name="weight">
+      <Position>12</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="39" parent="19" name="goods_brand_m2o">
+      <Position>13</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="40" parent="19" name="goods_type_m2o">
+      <Position>14</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="41" parent="19" name="fk_goods_brand_m2o">
+      <ColNames>goods_brand_m2o</ColNames>
+    </index>
+    <index id="42" parent="19" name="fk_goods_type_m2o">
+      <ColNames>goods_type_m2o</ColNames>
+    </index>
+    <key id="43" parent="19" name="PRIMARY">
+      <ColNames>goods_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="44" parent="19" name="fk_goods_brand_m2o">
+      <ColNames>goods_brand_m2o</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goodsbrand</RefTableName>
+      <RefColNames>brand_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="45" parent="19" name="fk_goods_type_m2o">
+      <ColNames>goods_type_m2o</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goodstype</RefTableName>
+      <RefColNames>type_id</RefColNames>
+    </foreign-key>
+    <column id="46" parent="20" name="GoodsBrand8JPA_brand_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="20" name="goods8JPASet_goods_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="48" parent="20" name="UK_eskpo2dsuitxlx19fyh9y34i5">
+      <ColNames>goods8JPASet_goods_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="49" parent="20" name="PRIMARY">
+      <ColNames>GoodsBrand8JPA_brand_id
+goods8JPASet_goods_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="50" parent="20" name="UK_eskpo2dsuitxlx19fyh9y34i5">
+      <ColNames>goods8JPASet_goods_id</ColNames>
+      <UnderlyingIndexName>UK_eskpo2dsuitxlx19fyh9y34i5</UnderlyingIndexName>
+    </key>
+    <foreign-key id="51" parent="20" name="fk_jpa_goods_brand_set">
+      <ColNames>GoodsBrand8JPA_brand_id</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goodsbrand</RefTableName>
+      <RefColNames>brand_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="52" parent="20" name="FKl0x2wuhvv1yyoa8iex20libs9">
+      <ColNames>goods8JPASet_goods_id</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goods</RefTableName>
+      <RefColNames>goods_id</RefColNames>
+    </foreign-key>
+    <column id="53" parent="21" name="GoodsType8JPA_type_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="21" name="childrenSet_type_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="55" parent="21" name="UK_681iilyout6vgmh833g0cynd4">
+      <ColNames>childrenSet_type_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="56" parent="21" name="PRIMARY">
+      <ColNames>GoodsType8JPA_type_id
+childrenSet_type_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="57" parent="21" name="UK_681iilyout6vgmh833g0cynd4">
+      <ColNames>childrenSet_type_id</ColNames>
+      <UnderlyingIndexName>UK_681iilyout6vgmh833g0cynd4</UnderlyingIndexName>
+    </key>
+    <foreign-key id="58" parent="21" name="fk_jpa_goods_children_set">
+      <ColNames>GoodsType8JPA_type_id</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goodstype</RefTableName>
+      <RefColNames>type_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="59" parent="21" name="FK3h4hs0cnyjty8r4usxa94l1h0">
+      <ColNames>childrenSet_type_id</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goodstype</RefTableName>
+      <RefColNames>type_id</RefColNames>
+    </foreign-key>
+    <column id="60" parent="22" name="Goods8JPA_goods_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="22" name="goods_img_list">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="62" parent="22" name="fk_goods_img">
+      <ColNames>Goods8JPA_goods_id</ColNames>
+    </index>
+    <foreign-key id="63" parent="22" name="fk_goods_img">
+      <ColNames>Goods8JPA_goods_id</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goods</RefTableName>
+      <RefColNames>goods_id</RefColNames>
+    </foreign-key>
+    <column id="64" parent="23" name="GoodsType8JPA_type_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="23" name="goods8JPASet_goods_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="66" parent="23" name="UK_bxkq96h79rcr61h9su3qyvx6w">
+      <ColNames>goods8JPASet_goods_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="67" parent="23" name="PRIMARY">
+      <ColNames>GoodsType8JPA_type_id
+goods8JPASet_goods_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="68" parent="23" name="UK_bxkq96h79rcr61h9su3qyvx6w">
+      <ColNames>goods8JPASet_goods_id</ColNames>
+      <UnderlyingIndexName>UK_bxkq96h79rcr61h9su3qyvx6w</UnderlyingIndexName>
+    </key>
+    <foreign-key id="69" parent="23" name="fk_jpa_goods_type_set">
+      <ColNames>GoodsType8JPA_type_id</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goodstype</RefTableName>
+      <RefColNames>type_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="70" parent="23" name="FKtko52f73s2baqqpclihunihuc">
+      <ColNames>goods8JPASet_goods_id</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goods</RefTableName>
+      <RefColNames>goods_id</RefColNames>
+    </foreign-key>
+    <column id="71" parent="24" name="brand_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="72" parent="24" name="brand_name">
+      <Position>2</Position>
+      <DataType>varchar(300)|0</DataType>
+    </column>
+    <column id="73" parent="24" name="brand_sort">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="74" parent="24" name="brand_url">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="75" parent="24" name="PRIMARY">
+      <ColNames>brand_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="76" parent="25" name="type_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="25" name="type_alias">
+      <Position>2</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="78" parent="25" name="type_name">
+      <Position>3</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="79" parent="25" name="type_sort">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="80" parent="25" name="parent_id">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="81" parent="25" name="fk_parent">
+      <ColNames>parent_id</ColNames>
+    </index>
+    <key id="82" parent="25" name="PRIMARY">
+      <ColNames>type_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="83" parent="25" name="fk_parent">
+      <ColNames>parent_id</ColNames>
+      <RefSchemaName>tinyshop8</RefSchemaName>
+      <RefTableName>jpa_goodstype</RefTableName>
+      <RefColNames>type_id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>

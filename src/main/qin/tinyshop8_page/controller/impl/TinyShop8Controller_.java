@@ -6,17 +6,20 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import qin.javaee8.core.support.FrameWorkDSCResult;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
 import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
 import qin.tinyshop8.domain8.jpa.User8JPA;
 import qin.tinyshop8_page.controller._abstract.TinyShop8ControllerImpl;
-import qin.tinyshop8_page.service.UserService;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static qin.tinyshop8_page.controller.TinyShop8Controller.TinyOperator.ADD;
 
 /**
  * Created by Administrator on 2017/8/5 0005-5.<br/>
@@ -194,16 +197,6 @@ public class TinyShop8Controller_
 
     //region 根据用户查找商品信息
 
-    //region 注入用户服务层
-    private UserService userService;
-
-    @Resource
-    public final void setUserService(UserService userService)
-    {
-        this.userService = userService;
-    }
-    //endregion
-
     /**
      * 根据登录的用户查找商品信息<br>
      * 每个用户对应多个商品, 并不需要将所有的商品信息都显示出来,
@@ -303,6 +296,55 @@ public class TinyShop8Controller_
     //endregion
 
     //region 二期(一期改进 2017-8-11)
+
+    //region 新增商品信息
+
+    /**
+     * 新增商品信息
+     *
+     * @param goods    将页面接收的变量值用一个内部类封装
+     * @param response 回复
+     * @author qinzhengying
+     * @since 1.8 2017/8/12
+     */
+    @RequestMapping(value = "/addGoods")
+    @Override
+    public void addGoods(final InnerGoods goods, final HttpServletResponse response)
+    {
+        try
+        {
+            //首先接收界面数据并且检查
+            Map<Goods8JPA, GoodsType8JPA> map = turnHTMLGoods(goods, ADD);
+            Set<Goods8JPA> keySet = map.keySet();
+
+            Goods8JPA goods8 = new Goods8JPA();
+
+            for (Iterator<Goods8JPA> it = keySet.iterator(); it.hasNext(); )
+            {
+                goods8 = it.next();
+            }
+
+            GoodsType8JPA goodsType8 = getValue(map, goods8);
+
+            //执行新增
+            FrameWorkDSCResult result = goodsService
+                      .addGoods(goods8, goodsType8);
+            if (result.isDaoFlag())
+            {
+                returnJson(str_success, response);
+            }
+            else
+            {
+                returnJson(result.getDaoException(), response);
+            }
+        }
+        catch (Exception ex)
+        {
+            printStackTrace(ex);
+        }
+    }
+
+    //endregion
 
     //region 显示商品类型信息
 

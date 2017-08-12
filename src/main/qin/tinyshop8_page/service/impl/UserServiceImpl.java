@@ -37,6 +37,8 @@ public class UserServiceImpl implements UserService
     }
     //endregion
 
+    //region 查询用户信息
+
     /**
      * 查询用户信息
      *
@@ -49,6 +51,9 @@ public class UserServiceImpl implements UserService
     {
         return userDAO.findUser(user);
     }
+    //endregion
+
+    //region 注册用户
 
     /**
      * 注册用户
@@ -62,4 +67,21 @@ public class UserServiceImpl implements UserService
     {
         return userDAO.registerUser(user);
     }
+    //endregion
+
+    //region 根据用户名查询用户
+
+    /**
+     * 根据用户名查询用户
+     *
+     * @param username 用户名
+     * @return
+     * @throws DataAccessException
+     */
+    @Override
+    public User8JPA findUserByUserName(String username) throws DataAccessException
+    {
+        return userDAO.findUserByUserName(username);
+    }
+    //endregion
 }

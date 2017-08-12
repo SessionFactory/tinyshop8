@@ -249,12 +249,20 @@
             "       &&goodsSubTitle=" + goodsSubTitle +
             "       &&goodsType=" + goodsType +
             "       &&goodsImages=" + goodsImage.toString() +
-            "       &&goodsKeyWords=" + goodsKeyWords;
+            "       &&goodsKeyWords=" + goodsKeyWords +
+            "       &&username=" + $('#hidden_username').val();
 
-        console.log(addURL);
-
-        //$('#goodsAddDate').datetimebox('getValue');
-        //$('#goodsType').combobox('getText')
+        $.ajax
+        (
+            {
+                url: addURL,
+                method: 'POST',
+                success: function (msg)
+                {
+                    alert(msg);
+                }
+            }
+        );
     }
 
     //endregion

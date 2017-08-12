@@ -102,6 +102,20 @@ public interface ShopBaseSupport extends JavaEE8BaseSupport
     SimpleDateFormat simpleDataFormat =
               new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     //endregion
+
+    //region 封装获取字符串长度方法
+
+    /**
+     * 封装获取字符串长度方法
+     *
+     * @param str 需要获取的字符串
+     * @return 返回长度
+     */
+    default int getStringLength(String str)
+    {
+        return str.length();
+    }
+    //endregion
 }
 
 /*

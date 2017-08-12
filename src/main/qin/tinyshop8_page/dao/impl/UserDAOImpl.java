@@ -153,5 +153,36 @@ public class UserDAOImpl
     }
     //endregion
 
+    //region 根据用户名查询用户信息
+
+    /**
+     * 根据用户名查询用户信息
+     *
+     * @param username 用户名
+     * @return 返回查询结果
+     * @throws DataAccessException 如果查询失败就抛出大异常
+     * @author qinzhengying
+     * @since 1.8 2017/8/12
+     */
+    @Override
+    public User8JPA findUserByUserName(String username)
+              throws DataAccessException
+    {
+        List<User8JPA> userList = getSession()
+                  .createQuery("from User8JPA where username=:username")
+                  .setParameter("username", username)
+                  .list();
+
+        if (userList.size() != 1)
+        {
+            throw new
+                      EmptyResultDataAccessException("用户查询失败!");
+        }
+
+        return userList.get(0);
+    }
+
+    //endregion
+
 
 }

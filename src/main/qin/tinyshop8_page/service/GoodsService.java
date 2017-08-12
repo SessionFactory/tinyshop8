@@ -1,7 +1,9 @@
 package qin.tinyshop8_page.service;
 
 import qin.javaee8.core.exceptions.dao.DataAccessException;
+import qin.javaee8.core.support.FrameWorkDSCResult;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
+import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
 import qin.tinyshop8.utils.ShopBaseSupport;
 
 import java.util.List;
@@ -37,5 +39,18 @@ public interface GoodsService extends ShopBaseSupport
      */
     List<Goods8JPA> findGoodsByUser(String username)
               throws DataAccessException;
+    //endregion
+
+    //region 新增商品信息
+
+    /**
+     * 新增商品信息
+     *
+     * @param goods8     商品实体类
+     * @param goodsType8 商品类型实体类
+     * @return 返回新增具体类
+     */
+    FrameWorkDSCResult addGoods(Goods8JPA goods8,
+                                GoodsType8JPA goodsType8);
     //endregion
 }

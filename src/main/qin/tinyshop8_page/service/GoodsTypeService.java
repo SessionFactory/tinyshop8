@@ -25,4 +25,18 @@ public interface GoodsTypeService extends ShopBaseSupport
      */
     List<GoodsType8JPA> findAll() throws DataAccessException;
     //endregion
+
+    //region 根据商品类型名称查找商品类型
+
+    /**
+     * 根据商品类型名称查找商品类型
+     *
+     * @param goodsType 商品类型名称
+     * @return 返回查询的实体记录
+     * @throws DataAccessException 如果没有查询成功就要抛出数据访问层异常
+     */
+    GoodsType8JPA findGoodsTypeByName(String goodsType)
+              throws DataAccessException;
+    //endregion
+
 }

@@ -37,4 +37,16 @@ public interface UserService extends ShopBaseSupport
      */
     FrameWorkDSCResult registerUser(User8JPA user) throws DataAccessException;
     //endregion
+
+    //region 根据用户名查询用户
+
+    /**
+     * 根据用户名查询用户
+     *
+     * @param username 用户名
+     * @return
+     * @throws DataAccessException
+     */
+    User8JPA findUserByUserName(String username) throws DataAccessException;
+    //endregion
 }

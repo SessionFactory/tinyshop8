@@ -3,7 +3,9 @@ package qin.tinyshop8_page.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import qin.javaee8.core.exceptions.dao.DataAccessException;
+import qin.javaee8.core.support.FrameWorkDSCResult;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
+import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
 import qin.tinyshop8_page.dao.GoodsDAO;
 import qin.tinyshop8_page.service.GoodsService;
 
@@ -63,6 +65,24 @@ public class GoodsServiceImpl implements GoodsService
               throws DataAccessException
     {
         return goodsDAO.findGoodsByUser(username);
+    }
+
+    //endregion
+
+    //region 新增商品信息
+
+    /**
+     * 新增商品信息
+     *
+     * @param goods8     商品实体类
+     * @param goodsType8 商品类型实体类
+     * @return 返回新增具体类
+     */
+    @Override
+    public FrameWorkDSCResult addGoods(Goods8JPA goods8,
+                                       GoodsType8JPA goodsType8)
+    {
+        return goodsDAO.addGoods(goods8, goodsType8);
     }
 
     //endregion

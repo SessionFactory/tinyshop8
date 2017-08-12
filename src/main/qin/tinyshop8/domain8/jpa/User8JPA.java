@@ -96,7 +96,7 @@ public class User8JPA extends SuperLongEntity
     //region 一个用户对应多个商品信息
     private Set<Goods8JPA> goods8JPASet = new HashSet<>();
 
-    @OneToMany(targetEntity = Goods8JPA.class, cascade = CascadeType.REMOVE,
+    @OneToMany(targetEntity = Goods8JPA.class, cascade = CascadeType.ALL,
               fetch = FetchType.EAGER)
     @JoinColumn(name = "join_user_goodsSet", foreignKey =
     @ForeignKey(name = "join_fk_user_goodsSet"))
