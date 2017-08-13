@@ -6,6 +6,7 @@ import qin.javaee8.core.exceptions.dao.DataAccessException;
 import qin.javaee8.core.support.FrameWorkDSCResult;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
 import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
+import qin.tinyshop8_page.controller.TinyShop8Controller;
 import qin.tinyshop8_page.dao.GoodsDAO;
 import qin.tinyshop8_page.service.GoodsService;
 
@@ -83,6 +84,24 @@ public class GoodsServiceImpl implements GoodsService
                                        GoodsType8JPA goodsType8)
     {
         return goodsDAO.addGoods(goods8, goodsType8);
+    }
+
+    //endregion
+
+    //region 改进版新增商品信息
+
+    /**
+     * 改进新增商品信息功能
+     *
+     * @param goods 商品html类
+     * @return 返回具体的类
+     * @author qinzhengying
+     * @since 1.8 2017/8/13
+     */
+    @Override
+    public FrameWorkDSCResult addGoods(TinyShop8Controller.InnerGoods goods)
+    {
+        return goodsDAO.addGoods(goods);
     }
 
     //endregion

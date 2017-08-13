@@ -6,6 +6,7 @@ import qin.javaee8.core.support.FrameWorkDSCResult;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
 import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
 import qin.tinyshop8.utils.ShopBaseSupport;
+import qin.tinyshop8_page.controller.TinyShop8Controller;
 
 import java.util.List;
 
@@ -42,5 +43,18 @@ public interface GoodsDAO extends DAOSupport8<Goods8JPA, Long>,
      */
     FrameWorkDSCResult addGoods(Goods8JPA goods8,
                                 GoodsType8JPA goodsType8);
+    //endregion
+
+    //region 改进新增商品信息功能
+
+    /**
+     * 改进新增商品信息功能
+     *
+     * @param goods 商品html类
+     * @return 返回具体的类
+     * @author qinzhengying
+     * @since 1.8 2017/8/13
+     */
+    FrameWorkDSCResult addGoods(TinyShop8Controller.InnerGoods goods);
     //endregion
 }

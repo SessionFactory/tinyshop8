@@ -8,6 +8,8 @@ import qin.tinyshop8.utils.ShopBaseSupport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/5 0005-5.<br/>
@@ -377,6 +379,26 @@ public interface TinyShop8Controller extends ShopBaseSupport,
         public void setUsername(String username)
         {
             this.username = username;
+        }
+        //endregion
+
+        //region 二期新特性
+        /**
+         * 图片集合
+         *
+         * @author qinzhengying
+         * @since 1.8 2017/8/13
+         */
+        private List<String> imagesList = new ArrayList<>();
+
+        public List<String> getImagesList()
+        {
+            return imagesList;
+        }
+
+        public void setImagesList(List<String> imagesList)
+        {
+            this.imagesList = imagesList;
         }
         //endregion
 

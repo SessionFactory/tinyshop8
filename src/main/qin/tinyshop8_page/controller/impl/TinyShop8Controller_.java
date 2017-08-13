@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import static qin.tinyshop8_page.controller.TinyShop8Controller.TinyOperator.ADD;
 
@@ -313,22 +311,9 @@ public class TinyShop8Controller_
     {
         try
         {
-            //首先接收界面数据并且检查
-            Map<Goods8JPA, GoodsType8JPA> map = turnHTMLGoods(goods, ADD);
-            Set<Goods8JPA> keySet = map.keySet();
-
-            Goods8JPA goods8 = new Goods8JPA();
-
-            for (Iterator<Goods8JPA> it = keySet.iterator(); it.hasNext(); )
-            {
-                goods8 = it.next();
-            }
-
-            GoodsType8JPA goodsType8 = getValue(map, goods8);
-
-            //执行新增
             FrameWorkDSCResult result = goodsService
-                      .addGoods(goods8, goodsType8);
+                      .addGoods(turnHTMLGoods2(goods, ADD));
+
             if (result.isDaoFlag())
             {
                 returnJson(str_success, response);

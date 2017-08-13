@@ -1,12 +1,15 @@
 package qin.tinyshop8_page.dao.impl;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import qin.javaee8.core.SessionBasic;
 import qin.javaee8.core.exceptions.dao.DataAccessException;
 import qin.javaee8.core.support.FrameWorkDSCResult;
 import qin.tinyshop8.domain8.jpa.Goods8JPA;
 import qin.tinyshop8.domain8.jpa.GoodsType8JPA;
 import qin.tinyshop8.domain8.jpa.User8JPA;
 import qin.tinyshop8.utils.ShopBasicDAOImpl;
+import qin.tinyshop8_page.controller.TinyShop8Controller.InnerGoods;
 import qin.tinyshop8_page.dao.GoodsDAO;
 
 import java.util.Collections;
@@ -94,16 +97,19 @@ public class GoodsDAOImpl
 
         try
         {
-            User8JPA user = goods8.getUser8JPA();
-            user.getGoods8JPASet().add(goods8);
-            goods8.setUser8JPA(user);
-            goods8.setGoodsType(goodsType8);
-            goodsType8.getGoods8JPASet().add(goods8);
+            setSession(null);
+            Session session = SessionBasic.session;
 
-            getSession().save(goods8);
+            //User8JPA user = goods8.getUser8JPA();
+            //user.getGoods8JPASet().add(goods8);
+            //goods8.setUser8JPA(user);
+            //goods8.setGoodsType(goodsType8);
+            //goodsType8.getGoods8JPASet().add(goods8);
+
+            session.merge(goods8);
             //更新商品类型信息
-            getSession().merge(goodsType8);
-            getSession().merge(user);
+            session.refresh(goodsType8);
+            //session.refresh(user);
 
             getTransaction().commit();
             result.setDaoFlag(true);
@@ -121,4 +127,70 @@ public class GoodsDAOImpl
     }
 
     //endregion
+
+    //region 改进新增商品信息功能
+
+    /**
+     * 改进新增商品信息功能
+     *
+     * @param goods 商品html类
+     * @return 返回具体的类
+     * @author qinzhengying
+     * @since 1.8 2017/8/13
+     */
+    @Override
+    public FrameWorkDSCResult addGoods(InnerGoods _goods)
+    {
+        FrameWorkDSCResult result = new FrameWorkDSCResult();
+
+        try
+        {
+            Goods8JPA goods = new Goods8JPA(
+                      _goods.getGoodsAddDate(), _goods.getGoodsName(),
+                      _goods.getGoodsSubTitle(), _goods.getGoodsProNo(),
+                      _goods.getGoodsNo(), Integer.valueOf(_goods.getGoodsStoreNums()),
+                      _goods.getGoodsWeight(), Double.valueOf(_goods.getGoodsSellPrice()),
+                      Double.valueOf(_goods.getGoodsMarketPrice()),
+                      Double.valueOf(_goods.getGoodsCostPrice())
+            );
+            goods.setGoodsImgs(_goods.getImagesList());
+
+            //用户的保存
+            User8JPA user = (User8JPA) getSession()
+                      .createQuery("from User8JPA where username=:username")
+                      .setParameter("username", _goods.getUsername())
+                      .list().get(0);
+            //类型
+            GoodsType8JPA goodsType = (GoodsType8JPA) getSession()
+                      .createQuery("from GoodsType8JPA where typeName=:typeName")
+                      .setParameter("typeName", _goods.getGoodsType())
+                      .list().get(0);
+
+            goods.setUser8JPA(user);
+            goods.setGoodsType(goodsType);
+
+            user.getGoods8JPASet().add(goods);
+            goodsType.getGoods8JPASet().add(goods);
+
+            getSession().save(goods);
+            getSession().update(user);
+            getSession().update(goodsType);
+            getTransaction().commit();
+
+            result.setDaoFlag(true);
+        }
+        catch (Exception ex)
+        {
+            printStackTrace(ex);
+            result.setDaoFlag(false);
+            result.setDaoException(ex);
+        }
+        finally
+        {
+            return result;
+        }
+    }
+
+    //endregion
+
 }

@@ -12,6 +12,7 @@ import qin.tinyshop8_page.service.UserService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -289,6 +290,187 @@ public abstract class TinyShop8ControllerImpl
 
         return resultMap;
     }
+
+    //region 改进转换功能
+
+    /**
+     * 改进转换功能
+     *
+     * @param goods    接收的html商品信息
+     * @param operator 是要新增还是更新
+     * @throws Exception 直接抛出大异常
+     */
+    protected InnerGoods turnHTMLGoods2(
+              final InnerGoods goods, TinyOperator operator)
+              throws Exception
+    {
+        InnerGoods _goods = new InnerGoods();
+
+        //用户
+        String username = trim(goods.getUsername());
+        _goods.setUsername(username);
+
+        //操作是新增还是删除
+        String myOperator = "";
+
+        if (operator == TinyOperator.ADD)
+        {
+            myOperator = "新增";
+        }
+        else
+        {
+            myOperator = "更新";
+        }
+
+        //名称
+        String goodsName = trim(goods.getGoodsName());
+
+        //(nullable, 400)
+        if (getStringLength(goodsName) == 0 ||
+                  getStringLength(goodsName) > 399)
+        {
+            throwDAOException(myOperator + "商品名称不能为空并且不能大于400个字符!");
+        }
+        _goods.setGoodsName(goodsName);
+
+        //新增日期
+        String goodsAddDate = trim(goods.getGoodsAddDate());
+
+        if (getStringLength(goodsAddDate) == 0)
+        {
+            throwDAOException(myOperator + "日期不能为空!");
+        }
+        _goods.setGoodsAddDate(goodsAddDate);
+
+        //成本价
+        String goodsCostPrice = trim(goods.getGoodsCostPrice());
+
+        if (getStringLength(goodsCostPrice) == 0)
+        {
+            throwDAOException(myOperator + "成本价不能为空!");
+        }
+
+        //TODO
+        checkTinyShopPrice(goodsCostPrice);
+
+        _goods.setGoodsCostPrice(goodsCostPrice);
+
+        //市场价
+        String goodsMarketPrice = trim(goods.getGoodsMarketPrice());
+
+        if (getStringLength(goodsMarketPrice) == 0)
+        {
+            throwDAOException(myOperator + "市场价不能为空!");
+        }
+
+        //TODO
+        checkTinyShopPrice(goodsMarketPrice);
+
+        _goods.setGoodsMarketPrice(goodsMarketPrice);
+
+        //货号
+        String goodsProNo = trim(goods.getGoodsProNo());
+
+        //(nullable, 50)
+        if (getStringLength(goodsProNo) == 0 ||
+                  getStringLength(goodsProNo) > 49)
+        {
+            throwDAOException(myOperator + "货号不能为空必须不能超过50个字符!");
+        }
+        _goods.setGoodsProNo(goodsProNo);
+
+        //销售价格
+        String goodsSellPrice = trim(goods.getGoodsSellPrice());
+
+        if (getStringLength(goodsSellPrice) == 0)
+        {
+            throwDAOException(myOperator + "销售价格不能为空!");
+        }
+
+        //TODO
+        checkTinyShopPrice(goodsSellPrice);
+        _goods.setGoodsSellPrice(goodsSellPrice);
+
+        //库存
+        String goodsStoreNums = trim(goods.getGoodsStoreNums());
+
+        if (getStringLength(goodsStoreNums) == 0)
+        {
+            throwDAOException(myOperator + "库存不能为空!");
+        }
+        _goods.setGoodsStoreNums(goodsStoreNums);
+
+        //编号
+        String goodsNo = trim(goods.getGoodsNo());
+
+        if (getStringLength(goodsNo) > 299)
+        {
+            throwDAOException(myOperator + "编号不能超过300个字符!");
+        }
+        _goods.setGoodsNo(goodsNo);
+
+        //重量
+        String goodsWeight = trim(goods.getGoodsWeight());
+
+        //nullable(10)
+        if (getStringLength(goodsWeight) == 0 ||
+                  getStringLength(goodsWeight) > 9)
+        {
+            throwDAOException(myOperator + "重量不能超过10个字符!");
+        }
+        _goods.setGoodsWeight(goodsWeight);
+
+        //副标题
+        String goodsSubTitle = trim(goods.getGoodsSubTitle());
+
+        if (getStringLength(goodsSubTitle) > 799)
+        {
+            throwDAOException(myOperator + "副标题不能超过800个字符!");
+        }
+        _goods.setGoodsSubTitle(goodsSubTitle);
+
+        //类型
+        String goodsType = trim(goods.getGoodsType());
+
+        if (getStringLength(goodsType) == 0)
+        {
+            throwDAOException(myOperator + "商品类型不能为空!");
+        }
+        _goods.setGoodsType(goodsType);
+
+        GoodsType8JPA _goodsType = goodsTypeService
+                  .findGoodsTypeByName(goodsType);
+        //图片
+        String goodsImages = trim(goods.getGoodsImages());
+
+        //根据逗号裁剪
+        List<String> goodsImagesList = new ArrayList<>();
+        if (getStringLength(goodsImages) > 1)
+        {
+            //首先截取最后一个逗号然后进行分割
+            String[] goodsImagesA = goodsImages
+                      .substring(0, getStringLength(goodsImages))
+                      .split(",");
+            for (int i = 0; i < goodsImagesA.length; i++)
+            {
+                goodsImagesList.add(goodsImagesA[i]);
+            }
+        }
+        else
+        {
+            goodsImagesList = Collections.emptyList();
+        }
+
+        _goods.setImagesList(goodsImagesList);
+
+        //关键词
+        String goodsKeyWords = trim(goods.getGoodsKeyWords());
+        _goods.setGoodsKeyWords(goodsKeyWords);
+
+        return _goods;
+    }
+    //endregion
+
     //endregion
 
     //endregion
