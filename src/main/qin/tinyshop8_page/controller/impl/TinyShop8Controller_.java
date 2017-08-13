@@ -297,6 +297,85 @@ public class TinyShop8Controller_
 
     //region 新增商品信息
 
+    //region 检查浮点数
+
+    /**
+     * 检查所有tinyshop里的价格(后期会重写此方法)
+     * 根据字符串中截取, 判断是否都是数字, 接收的价格必须是数字<br>
+     * (<br>
+     * &nbsp;&nbsp;1.不能是负数<br>
+     * &nbsp;&nbsp;2.必须大于0<br>
+     * &nbsp;&nbsp;3.必须是11.11格式数字<br>
+     * &nbsp;&nbsp;4.小数点 不能再末尾<br>
+     * )
+     *
+     * @param price 需要检查的价格
+     * @throws Exception 如果检查失败就直接抛出异常
+     */
+    @Override
+    public void checkTinyShopPrice(String price) throws Exception
+    {
+        String myPrice = "";
+
+        //记录.的数量
+        int index = 0;
+
+        //1.判断字符串中是否含有.
+        //判断之前首先要检查价格里面是不是有两个.
+        for (int i = 0; i < getStringLength(price); i++)
+        {
+            char c = price.charAt(i);
+            if (c == '.')
+            {
+                index++;
+            }
+        }
+
+        //判断index
+        if (index > 1)
+        {
+            superLogInfo("数字检查失败! 价格里不能有多个.");
+
+            throw new
+                      NumberFormatException(new StringBuilder()
+                                                      .append("价格里不能含有")
+                                                      .append(index)
+                                                      .append("个.!").toString());
+        }
+
+        //2.如果含有就替换
+        //记录.的位置
+        int indexOf = price.indexOf('.');
+        if (indexOf > 0)
+        {
+            //替换
+            myPrice = price.replace(".", "0");
+        }
+        else
+        {
+            //3.如果没有就使用原来的字符串
+            myPrice = price;
+        }
+        //4.判断字符串是否全部是数字
+        if (!(myPrice.matches("[0-9]*")))
+        {
+            superLogInfo("数字检查失败! 价格只能全部是数字");
+
+            throw new
+                      NumberFormatException("价格只能全部是数字!");
+        }
+        //5.判断开始是不是0
+        if (myPrice.startsWith("0"))
+        {
+            superLogInfo("数字检查失败! 价格开头不能为0!");
+
+            throw new
+                      NumberFormatException("价格开头不能为0!");
+        }
+    }
+
+    //endregion
+
     /**
      * 新增商品信息
      *
@@ -373,6 +452,5 @@ public class TinyShop8Controller_
     //endregion
 
     //endregion
-
 
 }
